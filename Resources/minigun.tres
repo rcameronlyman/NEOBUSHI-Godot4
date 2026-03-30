@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://ci27krilbmsej"]
+
+[ext_resource type="Script" uid="uid://bpqeo60w1c7x0" path="res://Resources/weapon_resource.gd" id="1_igxoy"]
+[ext_resource type="Script" uid="uid://dh2143cvgm38a" path="res://Resources/weapon_level_data.gd" id="1_sl525"]
+[ext_resource type="PackedScene" uid="uid://c17pbluwbuavp" path="res://Entities/projectile.tscn" id="2_2na3o"]
+
+[sub_resource type="Resource" id="Resource_2na3o"]
+script = ExtResource("1_sl525")
+level_description = "Increases Fire Rate"
+cooldown_add = -0.02
+metadata/_custom_type_script = "uid://dh2143cvgm38a"
+
+[sub_resource type="Resource" id="Resource_mqpff"]
+script = ExtResource("1_sl525")
+level_description = "Increases fire rate and damage"
+damage_add = 2.0
+cooldown_add = -0.02
+metadata/_custom_type_script = "uid://dh2143cvgm38a"
+
+[sub_resource type="Resource" id="Resource_q8bbx"]
+script = ExtResource("1_sl525")
+level_description = "Adds one projectile"
+projectile_add = 1
+metadata/_custom_type_script = "uid://dh2143cvgm38a"
+
+[sub_resource type="Resource" id="Resource_p58mh"]
+script = ExtResource("1_sl525")
+level_description = "Bullets bounce"
+bounce_add = 1
+metadata/_custom_type_script = "uid://dh2143cvgm38a"
+
+[sub_resource type="Resource" id="Resource_sl525"]
+script = ExtResource("1_sl525")
+level_description = "Increases fire rate and damage. Adds another projectile"
+damage_add = 2.0
+cooldown_add = -0.02
+projectile_add = 1
+metadata/_custom_type_script = "uid://dh2143cvgm38a"
+
+[resource]
+script = ExtResource("1_igxoy")
+weapon_name = "Minigun"
+projectile_scene = ExtResource("2_2na3o")
+base_damage = 5.0
+base_cooldown = 0.2
+base_speed = 800.0
+base_pierce = 0
+levels = Array[ExtResource("1_sl525")]([SubResource("Resource_2na3o"), SubResource("Resource_mqpff"), SubResource("Resource_q8bbx"), SubResource("Resource_p58mh"), SubResource("Resource_sl525")])
+metadata/_custom_type_script = "uid://bpqeo60w1c7x0"

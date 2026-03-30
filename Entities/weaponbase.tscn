@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://7cn7v4kjih8l"]
+
+[ext_resource type="Script" uid="uid://bc26uyd6j0gbb" path="res://Entities/weapon_base.gd" id="1_jdql4"]
+[ext_resource type="Resource" uid="uid://ci27krilbmsej" path="res://Resources/minigun.tres" id="2_b81gu"]
+
+[node name="WeaponBase" type="Node2D" unique_id=1491555433]
+script = ExtResource("1_jdql4")
+data = ExtResource("2_b81gu")
+
+[node name="Timer" type="Timer" parent="." unique_id=1876611321]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
