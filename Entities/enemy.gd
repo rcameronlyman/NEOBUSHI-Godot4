@@ -9,14 +9,16 @@ var player = null
 var current_health: float
 
 func _ready() -> void:
-	# 1. Initialize stats from the Resource
+	# 1. Initialize stats and visuals from the Resource [cite: 55, 81]
 	if data:
 		current_health = data.health
+		if data.sprite_texture:
+			sprite.texture = data.sprite_texture
 	
-	# 2. Find the player using the existing group logic 
+	# 2. Find the player using the existing group logic [cite: 55, 63]
 	player = get_tree().get_first_node_in_group("player")
 	
-	# 3. Setup Navigation [cite: 2]
+	# 3. Setup Navigation 
 	nav_agent.path_desired_distance = 20.0
 	nav_agent.target_desired_distance = 20.0
 
@@ -24,13 +26,13 @@ func _physics_process(_delta: float) -> void:
 	if not player or not data:
 		return
 		
-	# 4. Use NavigationAgent2D to find the path to the player [cite: 2]
+	# 4. Use NavigationAgent2D to find the path to the player 
 	nav_agent.target_position = player.global_position
 	
 	if nav_agent.is_navigation_finished():
 		return
 
-	# 5. Calculate movement using the Resource speed
+	# 5. Calculate movement using the Resource speed [cite: 55, 81]
 	var next_path_pos = nav_agent.get_next_path_position()
 	var direction = global_position.direction_to(next_path_pos)
 	
@@ -44,12 +46,12 @@ func _physics_process(_delta: float) -> void:
 		
 	move_and_slide()
 
-# 7. Combat logic: How the enemy takes damage
+# 7. Combat logic: How the enemy takes damage 
 func take_damage(amount: float):
 	current_health -= amount
 	if current_health <= 0:
 		die()
 
 func die():
-	# We will add XP drop logic here later
+	# We will add XP drop logic here later 
 	queue_free()

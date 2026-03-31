@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cbajjtb0et11j"]
 
 [ext_resource type="Script" uid="uid://l7dsl7bbtq8g" path="res://Entities/enemy.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://cymrbsfpfl0vm" path="res://Entities/Globontest.png" id="1_7k104"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7k104"]
 radius = 42.107006
@@ -13,7 +12,6 @@ script = ExtResource("1_4gyqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1498402586]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_7k104")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529013564]
 shape = SubResource("CircleShape2D_7k104")

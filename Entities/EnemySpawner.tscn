@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dii4r3o04ktur"]
+
+[ext_resource type="Script" uid="uid://du7iipugu8huk" path="res://Entities/EnemySpawner.gd" id="1_s28v5"]
+[ext_resource type="PackedScene" uid="uid://cbajjtb0et11j" path="res://Entities/enemy.tscn" id="2_w2c0k"]
+[ext_resource type="Resource" uid="uid://dwrdxy8sbc7bs" path="res://Resources/globon.tres" id="3_2sayj"]
+
+[node name="EnemySpawner" type="Node2D" unique_id=889252609]
+script = ExtResource("1_s28v5")
+enemy_scene = ExtResource("2_w2c0k")
+enemy_data = ExtResource("3_2sayj")
+
+[node name="Timer" type="Timer" parent="." unique_id=901968837]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

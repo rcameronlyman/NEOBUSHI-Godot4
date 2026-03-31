@@ -1,26 +1,18 @@
 [gd_scene format=3 uid="uid://caowemopmy5tr"]
 
 [ext_resource type="PackedScene" uid="uid://bi21d7paq183x" path="res://Entities/player.tscn" id="1_fj7yv"]
-[ext_resource type="Texture2D" uid="uid://b4n70uk33yxpk" path="res://icon.svg" id="2_tlwt5"]
-[ext_resource type="PackedScene" uid="uid://cbajjtb0et11j" path="res://Entities/enemy.tscn" id="3_tlwt5"]
+[ext_resource type="Script" uid="uid://d1hlforurybdl" path="res://Levels/world.gd" id="1_pa6j6"]
+[ext_resource type="Resource" uid="uid://d0kgexdoyh0v2" path="res://Resources/moon_level.tres" id="2_4dvsh"]
+[ext_resource type="PackedScene" uid="uid://dii4r3o04ktur" path="res://Entities/EnemySpawner.tscn" id="3_pa6j6"]
 
 [node name="World" type="Node2D" unique_id=2018461267]
+script = ExtResource("1_pa6j6")
+current_level = ExtResource("2_4dvsh")
+
+[node name="LevelContainer" type="Node2D" parent="." unique_id=1045564360]
 
 [node name="Player" parent="." unique_id=791527053 instance=ExtResource("1_fj7yv")]
 position = Vector2(462, 374)
 
-[node name="Icon" type="Sprite2D" parent="." unique_id=4649934]
-position = Vector2(829, 619)
-texture = ExtResource("2_tlwt5")
-
-[node name="Enemy" parent="." unique_id=1053892412 instance=ExtResource("3_tlwt5")]
-position = Vector2(710, 442)
-
-[node name="Enemy2" parent="." unique_id=156864985 instance=ExtResource("3_tlwt5")]
-position = Vector2(1037, 414)
-
-[node name="Enemy3" parent="." unique_id=1623364825 instance=ExtResource("3_tlwt5")]
-position = Vector2(1289, 395)
-
-[node name="Enemy4" parent="." unique_id=815802247 instance=ExtResource("3_tlwt5")]
-position = Vector2(1260, 566)
+[node name="EnemySpawner" parent="." unique_id=889252609 instance=ExtResource("3_pa6j6")]
+position = Vector2(648, 390)

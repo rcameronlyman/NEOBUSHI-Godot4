@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlayerResource" format=3 uid="uid://dqbely7151ppr"]
+
+[ext_resource type="Script" uid="uid://dvb87pjliucji" path="res://Resources/player_resource.gd" id="1_euy2v"]
+
+[resource]
+script = ExtResource("1_euy2v")
+character_name = "Kinetic Mech"
+metadata/_custom_type_script = "uid://dvb87pjliucji"

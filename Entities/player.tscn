@@ -1,80 +1,9 @@
 [gd_scene format=3 uid="uid://bi21d7paq183x"]
 
 [ext_resource type="Script" uid="uid://bv05qpc28i6qw" path="res://Entities/player.gd" id="1_gb1tc"]
-[ext_resource type="Texture2D" uid="uid://bh4bk0dgo58jx" path="res://Assets/RIGHTWALK.png" id="1_tcnsb"]
-[ext_resource type="Resource" uid="uid://bufn0y6pu46vo" path="res://Resources/DefaultMechMovement.tres" id="2_xd3k7"]
+[ext_resource type="Resource" uid="uid://dqbely7151ppr" path="res://Resources/kineticmech.tres" id="2_taegk"]
+[ext_resource type="SpriteFrames" uid="uid://ms8uxdab1i66" path="res://Resources/kinetic_mech_frames.tres" id="3_kee72"]
 [ext_resource type="PackedScene" uid="uid://7cn7v4kjih8l" path="res://Entities/weaponbase.tscn" id="4_taegk"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gb1tc"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(0, 0, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xd3k7"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(360, 0, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_taegk"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(720, 0, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kee72"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(0, 544, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_prmdv"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(360, 544, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s1j76"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(720, 544, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6jj0l"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(0, 1088, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ua6mu"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(360, 1088, 360, 544)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xy0x1"]
-atlas = ExtResource("1_tcnsb")
-region = Rect2(720, 1088, 360, 544)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xakct"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gb1tc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xd3k7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_taegk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kee72")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_prmdv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s1j76")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6jj0l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ua6mu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xy0x1")
-}],
-"loop": true,
-"name": &"default",
-"speed": 6.0
-}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xd3k7"]
 radius = 49.0
@@ -83,11 +12,11 @@ height = 98.0
 [node name="Player" type="CharacterBody2D" unique_id=791527053 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_gb1tc")
-movement_data = ExtResource("2_xd3k7")
+data = ExtResource("2_taegk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1481851563]
 scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_xakct")
+sprite_frames = ExtResource("3_kee72")
 autoplay = "default"
 frame_progress = 0.67591286
 
@@ -96,7 +25,7 @@ position = Vector2(-23, 85)
 shape = SubResource("CapsuleShape2D_xd3k7")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1080486196]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
 [node name="WeaponBase" parent="." unique_id=1491555433 instance=ExtResource("4_taegk")]

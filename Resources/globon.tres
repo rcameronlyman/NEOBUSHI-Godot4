@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="EnemyResource" format=3 uid="uid://dwrdxy8sbc7bs"]
 
 [ext_resource type="Script" uid="uid://beocjqkpevx8d" path="res://Resources/enemy_resource.gd" id="1_bc6cs"]
+[ext_resource type="Texture2D" uid="uid://cymrbsfpfl0vm" path="res://Entities/Globontest.png" id="2_jr4j5"]
 
 [resource]
 script = ExtResource("1_bc6cs")
+sprite_texture = ExtResource("2_jr4j5")
 metadata/_custom_type_script = "uid://beocjqkpevx8d"

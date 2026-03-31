@@ -3,10 +3,20 @@
 [ext_resource type="Script" uid="uid://bc26uyd6j0gbb" path="res://Entities/weapon_base.gd" id="1_jdql4"]
 [ext_resource type="Resource" uid="uid://ci27krilbmsej" path="res://Resources/minigun.tres" id="2_b81gu"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_b81gu"]
+radius = 300.0
+
 [node name="WeaponBase" type="Node2D" unique_id=1491555433]
 script = ExtResource("1_jdql4")
 data = ExtResource("2_b81gu")
 
 [node name="Timer" type="Timer" parent="." unique_id=1876611321]
+
+[node name="TargetingArea" type="Area2D" parent="." unique_id=1958724539]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetingArea" unique_id=968827492]
+shape = SubResource("CircleShape2D_b81gu")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
