@@ -12,7 +12,5 @@ current_level = ExtResource("2_4dvsh")
 [node name="LevelContainer" type="Node2D" parent="." unique_id=1045564360]
 
 [node name="Player" parent="." unique_id=791527053 instance=ExtResource("1_fj7yv")]
-position = Vector2(462, 374)
 
-[node name="EnemySpawner" parent="." unique_id=889252609 instance=ExtResource("3_pa6j6")]
-position = Vector2(648, 390)
+[node name="EnemySpawner" parent="Player" unique_id=889252609 instance=ExtResource("3_pa6j6")]

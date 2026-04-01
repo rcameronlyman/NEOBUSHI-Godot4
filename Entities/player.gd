@@ -3,6 +3,12 @@ extends CharacterBody2D
 # This now holds the character's stats and art
 @export var data: PlayerResource
 
+var current_health: float
+
+func _ready() -> void:
+	if data:
+		current_health = data.max_health
+
 func _physics_process(delta: float) -> void:
 	if not data:
 		return
@@ -47,3 +53,14 @@ func handle_animations(axis: Vector2) -> void:
 	else:
 		$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.frame = 0
+
+func take_damage(amount: float) -> void:
+	current_health -= amount
+	print("Player took ", amount, " damage! Current health: ", current_health)
+	
+	if current_health <= 0:
+		die()
+
+func die() -> void:
+	print("Game Over!")
+	queue_free()

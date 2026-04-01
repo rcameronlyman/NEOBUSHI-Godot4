@@ -9,13 +9,13 @@ var player = null
 var current_health: float
 
 func _ready() -> void:
-	# 1. Initialize stats and visuals from the Resource [cite: 55, 81]
+	# 1. Initialize stats and visuals from the Resource
 	if data:
 		current_health = data.health
 		if data.sprite_texture:
 			sprite.texture = data.sprite_texture
 	
-	# 2. Find the player using the existing group logic [cite: 55, 63]
+	# 2. Find the player using the existing group logic
 	player = get_tree().get_first_node_in_group("player")
 	
 	# 3. Setup Navigation 
@@ -32,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		return
 
-	# 5. Calculate movement using the Resource speed [cite: 55, 81]
+	# 5. Calculate movement using the Resource speed
 	var next_path_pos = nav_agent.get_next_path_position()
 	var direction = global_position.direction_to(next_path_pos)
 	
@@ -53,5 +53,11 @@ func take_damage(amount: float):
 		die()
 
 func die():
-	# We will add XP drop logic here later 
+	# Emit the death signal to the Global Bus for the Director to hear
+	GameEvents.enemy_died.emit(global_position, data.xp_value)
 	queue_free()
+
+# 8. How the enemy deals damage
+func _on_damage_area_body_entered(body: Node2D) -> void:
+	if body == player and body.has_method("take_damage"):
+		body.take_damage(data.damage)

@@ -5,9 +5,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7k104"]
 radius = 42.107006
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7qchm"]
+radius = 45.0
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1053892412]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 5
 script = ExtResource("1_4gyqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1498402586]
@@ -17,3 +20,11 @@ scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_7k104")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=903360367]
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=803591187]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1567536810]
+shape = SubResource("CircleShape2D_7qchm")
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
