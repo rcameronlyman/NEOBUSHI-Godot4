@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://drbbvkybmq514"]
+
+[ext_resource type="PackedScene" uid="uid://dxpbu8tpkptak" path="res://UI/experience_UI.tscn" id="1_ne75i"]
+[ext_resource type="PackedScene" uid="uid://eagbensbpqsg" path="res://UI/inventory_display.tscn" id="2_bytes"]
+
+[node name="Hud" type="CanvasLayer" unique_id=2108541017]
+
+[node name="HUDContainer" type="Control" parent="." unique_id=1038146477]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExperienceUi" parent="HUDContainer" unique_id=1192521778 instance=ExtResource("1_ne75i")]
+layout_mode = 1
+
+[node name="InventoryDisplay" parent="HUDContainer" unique_id=1909451238 instance=ExtResource("2_bytes")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -276.0
+offset_bottom = 120.0
+grow_horizontal = 0
+grow_vertical = 1

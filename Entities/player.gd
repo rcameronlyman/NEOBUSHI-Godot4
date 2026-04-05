@@ -8,9 +8,17 @@ var current_xp: int = 0
 var current_level: int = 1
 var next_level_xp: int = 100
 
+# NEW: This links the code to the HealthBar node you created
+@onready var health_bar = $HealthBar
+
 func _ready() -> void:
 	if data:
 		current_health = data.max_health
+		
+		# Initialize the health bar values based on your Resource
+		if health_bar:
+			health_bar.max_value = data.max_health
+			health_bar.value = current_health
 	
 	# Emit initial XP state for future UI
 	GameEvents.xp_gained.emit(current_xp, next_level_xp)
@@ -72,17 +80,24 @@ func handle_animations(axis: Vector2) -> void:
 func take_damage(amount: float) -> void:
 	current_health -= amount
 	
-	# NEW: This allows you to see every hit in the output console 
+	# NEW: Update the visual health bar every time damage is taken
+	if health_bar:
+		health_bar.value = current_health
+	
+	# This allows you to see every hit in the output console
 	print("OUCH! Player took ", amount, " damage. Health left: ", current_health)
 	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
-	# NEW: Definitive proof of death in the console 
+	# NEW: Hide the health bar when dead so it doesn't float over the "corpse"
+	if health_bar:
+		health_bar.hide()
+		
 	print("!!! GAME OVER - PLAYER HAS DIED !!!")
 	
-	# Stop the walking animation and turn the player red so you don't moonwalk 
+	# Stop the walking animation and turn the player red
 	$AnimatedSprite2D.stop()
 	$AnimatedSprite2D.modulate = Color(1, 0, 0, 0.6) 
 	
@@ -105,7 +120,7 @@ func level_up() -> void:
 	current_xp -= next_level_xp
 	next_level_xp = int(next_level_xp * 1.5)
 	
-	# Signal the ProgressionManager to trigger the upgrade menu [cite: 8]
+	# Signal the ProgressionManager to trigger the upgrade menu
 	GameEvents.level_up.emit(current_level)
 
 func _on_upgrade_applied(upgrade: UpgradeResource) -> void:
