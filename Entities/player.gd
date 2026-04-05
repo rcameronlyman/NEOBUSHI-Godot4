@@ -67,12 +67,25 @@ func handle_animations(axis: Vector2) -> void:
 		$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.frame = 0
 
+# --- COMBAT LOGIC ---
+
 func take_damage(amount: float) -> void:
 	current_health -= amount
+	
+	# NEW: This allows you to see every hit in the output console 
+	print("OUCH! Player took ", amount, " damage. Health left: ", current_health)
+	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
+	# NEW: Definitive proof of death in the console 
+	print("!!! GAME OVER - PLAYER HAS DIED !!!")
+	
+	# Stop the walking animation and turn the player red so you don't moonwalk 
+	$AnimatedSprite2D.stop()
+	$AnimatedSprite2D.modulate = Color(1, 0, 0, 0.6) 
+	
 	set_physics_process(false)
 
 # --- PROGRESSION LOGIC ---
@@ -92,7 +105,7 @@ func level_up() -> void:
 	current_xp -= next_level_xp
 	next_level_xp = int(next_level_xp * 1.5)
 	
-	# Signal the ProgressionManager to trigger the upgrade menu
+	# Signal the ProgressionManager to trigger the upgrade menu [cite: 8]
 	GameEvents.level_up.emit(current_level)
 
 func _on_upgrade_applied(upgrade: UpgradeResource) -> void:

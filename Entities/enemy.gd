@@ -10,6 +10,9 @@ var player = null
 var current_health: float
 
 func _ready() -> void:
+	# Register this enemy to the global group so bouncing bullets can find it
+	add_to_group("enemies")
+	
 	# 1. Initialize stats and visuals from the Resource
 	if data:
 		current_health = data.health

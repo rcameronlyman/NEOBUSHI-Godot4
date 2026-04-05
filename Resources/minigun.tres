@@ -19,8 +19,9 @@ metadata/_custom_type_script = "uid://dh2143cvgm38a"
 
 [sub_resource type="Resource" id="Resource_q8bbx"]
 script = ExtResource("1_sl525")
-level_description = "Adds one projectile"
-projectile_add = 1
+level_description = "Adds one projectile, doubles clip size"
+projectiles_add = 1
+clip_size_add = 25
 metadata/_custom_type_script = "uid://dh2143cvgm38a"
 
 [sub_resource type="Resource" id="Resource_p58mh"]
@@ -34,7 +35,21 @@ script = ExtResource("1_sl525")
 level_description = "Increases fire rate and damage. Adds another projectile"
 damage_add = 2.0
 cooldown_add = -0.02
-projectile_add = 1
+projectiles_add = 1
+metadata/_custom_type_script = "uid://dh2143cvgm38a"
+
+[sub_resource type="Resource" id="Resource_kxqxg"]
+script = ExtResource("1_sl525")
+level_description = "Bullets pierce 1 enemy"
+pierce_add = 1
+metadata/_custom_type_script = "uid://dh2143cvgm38a"
+
+[sub_resource type="Resource" id="Resource_tvyaj"]
+script = ExtResource("1_sl525")
+level_description = "Bullets bounce twice, pierce another enemy, adds a projectile"
+projectiles_add = 1
+bounce_add = 1
+pierce_add = 1
 metadata/_custom_type_script = "uid://dh2143cvgm38a"
 
 [resource]
@@ -45,5 +60,6 @@ base_damage = 5.0
 base_cooldown = 0.2
 base_speed = 800.0
 base_pierce = 0
-levels = Array[ExtResource("1_sl525")]([SubResource("Resource_2na3o"), SubResource("Resource_mqpff"), SubResource("Resource_q8bbx"), SubResource("Resource_p58mh"), SubResource("Resource_sl525")])
+base_clip_size = 25
+levels = Array[ExtResource("1_sl525")]([SubResource("Resource_2na3o"), SubResource("Resource_mqpff"), SubResource("Resource_q8bbx"), SubResource("Resource_p58mh"), SubResource("Resource_sl525"), SubResource("Resource_kxqxg"), SubResource("Resource_tvyaj")])
 metadata/_custom_type_script = "uid://bpqeo60w1c7x0"
