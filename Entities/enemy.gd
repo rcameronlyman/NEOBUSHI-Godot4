@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var data: EnemyResource
+@export var gem_scene: PackedScene
 
 @onready var sprite = $Sprite2D
 @onready var nav_agent = $NavigationAgent2D
@@ -55,7 +56,18 @@ func take_damage(amount: float):
 func die():
 	# Emit the death signal to the Global Bus for the Director to hear
 	GameEvents.enemy_died.emit(global_position, data.xp_value)
-	queue_free()
+	
+	# Drop the XP Gem
+	if gem_scene:
+		var gem = gem_scene.instantiate()
+		# Set properties before adding to the tree
+		gem.global_position = global_position
+		gem.setup(data.xp_value)
+		# Defer adding to the scene tree to avoid physics state errors
+		get_tree().current_scene.call_deferred("add_child", gem)
+		
+	# Defer the removal of the enemy node to avoid physics state errors
+	call_deferred("queue_free")
 
 # 8. How the enemy deals damage
 func _on_damage_area_body_entered(body: Node2D) -> void:

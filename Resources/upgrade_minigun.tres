@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UpgradeResource" format=3 uid="uid://0gse3xbmei12"]
+
+[ext_resource type="Texture2D" uid="uid://cm0dda0jebljg" path="res://Assets/minigun_icon.png" id="1_atajs"]
+[ext_resource type="Script" uid="uid://c0sm1qbd0kwq8" path="res://Resources/upgrade_resource.gd" id="1_b2moi"]
+[ext_resource type="Resource" uid="uid://ci27krilbmsej" path="res://Resources/minigun.tres" id="2_v1eqb"]
+
+[resource]
+script = ExtResource("1_b2moi")
+upgrade_id = "minigun"
+upgrade_name = "Minigun"
+description = "A rapid-fire kinetic rotary cannon."
+icon = ExtResource("1_atajs")
+weapon_data = ExtResource("2_v1eqb")
+metadata/_custom_type_script = "uid://c0sm1qbd0kwq8"

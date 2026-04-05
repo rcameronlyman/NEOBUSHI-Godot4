@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://d1hlforurybdl" path="res://Levels/world.gd" id="1_pa6j6"]
 [ext_resource type="Resource" uid="uid://d0kgexdoyh0v2" path="res://Resources/moon_level.tres" id="2_4dvsh"]
 [ext_resource type="PackedScene" uid="uid://dii4r3o04ktur" path="res://Entities/EnemySpawner.tscn" id="3_pa6j6"]
+[ext_resource type="PackedScene" uid="uid://bxx7wrfgh4hlu" path="res://UI/upgrade_menu.tscn" id="5_ks8n1"]
 
 [node name="World" type="Node2D" unique_id=2018461267]
 script = ExtResource("1_pa6j6")
@@ -14,3 +15,7 @@ current_level = ExtResource("2_4dvsh")
 [node name="Player" parent="." unique_id=791527053 instance=ExtResource("1_fj7yv")]
 
 [node name="EnemySpawner" parent="Player" unique_id=889252609 instance=ExtResource("3_pa6j6")]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=268256387]
+
+[node name="UpgradeMenu" parent="UI" unique_id=2054709750 instance=ExtResource("5_ks8n1")]

@@ -9,6 +9,9 @@
 radius = 49.0
 height = 98.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_taegk"]
+radius = 200.0
+
 [node name="Player" type="CharacterBody2D" unique_id=791527053 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_gb1tc")
@@ -28,5 +31,19 @@ shape = SubResource("CapsuleShape2D_xd3k7")
 zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 
-[node name="WeaponBase" parent="." unique_id=1491555433 instance=ExtResource("4_taegk")]
-position = Vector2(81, -27)
+[node name="MagnetArea" type="Area2D" parent="." unique_id=615129686]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea" unique_id=1808439694]
+position = Vector2(-2, -1)
+shape = SubResource("CircleShape2D_taegk")
+
+[node name="Shoulder_Socket_L" type="Marker2D" parent="." unique_id=1845121725]
+position = Vector2(35, -110)
+
+[node name="WeaponBase" parent="Shoulder_Socket_L" unique_id=1491555433 instance=ExtResource("4_taegk")]
+position = Vector2(-2, -10)
+
+[node name="Shoulder_Socket_R" type="Marker2D" parent="." unique_id=1692120616]
+position = Vector2(-60, -110)

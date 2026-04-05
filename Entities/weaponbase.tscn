@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bc26uyd6j0gbb" path="res://Entities/weapon_base.gd" id="1_jdql4"]
 [ext_resource type="Resource" uid="uid://ci27krilbmsej" path="res://Resources/minigun.tres" id="2_b81gu"]
+[ext_resource type="Texture2D" uid="uid://bbkn1l8ky6mf0" path="res://Assets/MinigunSprite.png" id="3_7hg0c"]
+[ext_resource type="Texture2D" uid="uid://biedtotg23qpc" path="res://Assets/MinigunMuzzle.png" id="4_g5et2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b81gu"]
 radius = 300.0
@@ -18,5 +20,20 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetingArea" unique_id=968827492]
 shape = SubResource("CircleShape2D_b81gu")
+
+[node name="GunSprite" type="Sprite2D" parent="." unique_id=1945729826]
+position = Vector2(36.999996, -17.999998)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_7hg0c")
+flip_h = true
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1725635526]
+position = Vector2(88, -1)
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Muzzle" unique_id=2112746803]
+position = Vector2(-18, -10)
+rotation = 3.9304814
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_g5et2")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

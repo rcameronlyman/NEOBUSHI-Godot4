@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://fobvdqyi7q65"]
+
+[ext_resource type="Script" uid="uid://cuk4bogktabbp" path="res://Autoloads/progression_manager.gd" id="1_epfrq"]
+[ext_resource type="Script" uid="uid://c0sm1qbd0kwq8" path="res://Resources/upgrade_resource.gd" id="2_10yw8"]
+[ext_resource type="Resource" uid="uid://0gse3xbmei12" path="res://Resources/upgrade_minigun.tres" id="3_26xgx"]
+
+[node name="ProgressionManager" type="Node" unique_id=1371858131]
+script = ExtResource("1_epfrq")
+all_upgrades = Array[ExtResource("2_10yw8")]([ExtResource("3_26xgx")])
+starting_weapon = ExtResource("3_26xgx")

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bxx7wrfgh4hlu"]
+
+[ext_resource type="Script" uid="uid://e1bqysnru87s" path="res://UI/upgrade_menu.gd" id="1_f4tld"]
+[ext_resource type="PackedScene" uid="uid://eagbensbpqsg" path="res://UI/inventory_display.tscn" id="1_hofnk"]
+[ext_resource type="Script" uid="uid://dmocpfr0nwkmv" path="res://UI/inventory_display.gd" id="2_b1awm"]
+
+[node name="UpgradeMenu" type="CanvasLayer" unique_id=2054709750]
+process_mode = 3
+script = ExtResource("1_f4tld")
+
+[node name="InventoryDisplay" parent="." unique_id=1909451238 instance=ExtResource("1_hofnk")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -276.0
+offset_bottom = 120.0
+grow_horizontal = 0
+grow_vertical = 1
+script = ExtResource("2_b1awm")
+
+[node name="MenuRoot" type="Control" parent="." unique_id=1726348262]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MenuRoot" unique_id=470405946]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=349929969]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20

@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameEvents="*uid://ca11lff61ybuk"
+ProgressionManager="*uid://fobvdqyi7q65"
 
 [input]
 

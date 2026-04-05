@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://de6a37snugdkw"]
+
+[ext_resource type="Script" uid="uid://did3x7ervxr2u" path="res://UI/inventory_slot.gd" id="1_hmrqk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8u14g"]
+bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+
+[node name="InventorySlot" type="PanelContainer" unique_id=1795185565]
+custom_minimum_size = Vector2(48, 48)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8u14g")
+script = ExtResource("1_hmrqk")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1895483033]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
