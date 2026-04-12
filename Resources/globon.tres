@@ -6,5 +6,7 @@
 [resource]
 script = ExtResource("1_bc6cs")
 sprite_texture = ExtResource("2_jr4j5")
-health = 5.0
+wobble_speed = 0.01
+wobble_intensity = 2.0
+health = 10.0
 metadata/_custom_type_script = "uid://beocjqkpevx8d"

@@ -15,3 +15,6 @@ signal wall_damaged(current_hp: float, max_hp: float)
 signal wall_destroyed()
 signal objective_updated(description: String, progress_percentage: float)
 signal request_spawn_intensity(multiplier: float)
+
+# Game State Signals
+signal player_died

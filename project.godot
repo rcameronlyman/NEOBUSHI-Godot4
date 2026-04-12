@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="NEO BUSHI"
-run/main_scene="uid://caowemopmy5tr"
+run/main_scene="uid://c3btsv3v50to8"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameEvents="*uid://ca11lff61ybuk"
 ProgressionManager="*uid://fobvdqyi7q65"
+SaveManager="*uid://dvcplsig4rw0b"
 
 [input]
 

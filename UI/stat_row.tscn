@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://7k8dndea7tlu"]
+
+[ext_resource type="Script" uid="uid://bphkw184booc3" path="res://UI/stat_row.gd" id="1_qrxr3"]
+
+[node name="Statrow" type="HBoxContainer" unique_id=1811692442]
+custom_minimum_size = Vector2(0, 50)
+theme_override_constants/separation = 20
+script = ExtResource("1_qrxr3")
+
+[node name="StatNameLabel" type="Label" parent="." unique_id=1380011750]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "STAT NAME"
+
+[node name="LevelLabel" type="Label" parent="." unique_id=639851688]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "0/3"
+horizontal_alignment = 1
+
+[node name="PurchaseButton" type="Button" parent="." unique_id=2073997584]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "50 XP"
+
+[connection signal="pressed" from="PurchaseButton" to="." method="_on_purchase_button_pressed"]

@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://l7dsl7bbtq8g" path="res://Entities/enemy.gd" id="1_4gyqm"]
 [ext_resource type="PackedScene" uid="uid://clei2tj6ilju1" path="res://Entities/XPGem.tscn" id="2_5bdg5"]
+[ext_resource type="Shader" uid="uid://b3dk0ppuhnsr5" path="res://Shaders/hit_flash.gdshader" id="3_0ifcb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fjgg4"]
+resource_local_to_scene = true
+shader = ExtResource("3_0ifcb")
+shader_parameter/active = false
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7k104"]
 radius = 42.107006
@@ -16,6 +23,7 @@ script = ExtResource("1_4gyqm")
 gem_scene = ExtResource("2_5bdg5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1498402586]
+material = SubResource("ShaderMaterial_fjgg4")
 scale = Vector2(0.1, 0.1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529013564]

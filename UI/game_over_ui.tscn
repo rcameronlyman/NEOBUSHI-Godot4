@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://fmuhxn63wnqx"]
+
+[ext_resource type="Script" uid="uid://c7wsipwutoskt" path="res://UI/game_over_ui.gd" id="1_t05f7"]
+
+[node name="GameOverUI" type="CanvasLayer" unique_id=1764972576]
+process_mode = 3
+script = ExtResource("1_t05f7")
+
+[node name="Control" type="Control" parent="." unique_id=618806149]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundDim" type="ColorRect" parent="Control" unique_id=1122400417]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2901961)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=405632504]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -46.5
+offset_right = 46.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer" unique_id=85915161]
+layout_mode = 2
+text = "GAME OVER"
+
+[node name="RetryButton" type="Button" parent="Control/VBoxContainer" unique_id=1248814676]
+layout_mode = 2
+text = "RETRY"
+
+[node name="QuitButton" type="Button" parent="Control/VBoxContainer" unique_id=360341]
+layout_mode = 2
+text = "QUIT"
+
+[connection signal="pressed" from="Control/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

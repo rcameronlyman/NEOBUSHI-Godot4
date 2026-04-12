@@ -18,6 +18,10 @@ func _ready() -> void:
 		current_health = data.health
 		if data.sprite_texture:
 			sprite.texture = data.sprite_texture
+		
+		# INITIALIZE JUICE: Set shader color from resource if a material exists
+		if sprite.material:
+			sprite.material.set_shader_parameter("flash_color", data.hit_flash_color)
 	
 	# 2. Find the player using the existing group logic
 	player = get_tree().get_first_node_in_group("player")
@@ -42,6 +46,11 @@ func _physics_process(_delta: float) -> void:
 	
 	velocity = direction * data.speed
 	
+	# --- JUICE: PROCEDURAL WOBBLE ---
+	# Rotates the sprite based on unique resource speed/intensity
+	var wobble = sin(Time.get_ticks_msec() * data.wobble_speed) * data.wobble_intensity
+	sprite.rotation_degrees = wobble
+	
 	# 6. Visuals: Flip the sprite based on movement 
 	if direction.x < 0:
 		sprite.flip_h = true
@@ -53,6 +62,15 @@ func _physics_process(_delta: float) -> void:
 # 7. Combat logic: How the enemy takes damage 
 func take_damage(amount: float):
 	current_health -= amount
+	
+	# --- JUICE: HIT FLASH ---
+	if sprite.material:
+		sprite.material.set_shader_parameter("active", true)
+		get_tree().create_timer(0.15).timeout.connect(func(): 
+			if is_instance_valid(sprite):
+				sprite.material.set_shader_parameter("active", false)
+		)
+	
 	if current_health <= 0:
 		die()
 
@@ -63,10 +81,8 @@ func die():
 	# Drop the XP Gem
 	if gem_scene:
 		var gem = gem_scene.instantiate()
-		# Set properties before adding to the tree
 		gem.global_position = global_position
 		gem.setup(data.xp_value)
-		# Defer adding to the scene tree to avoid physics state errors
 		get_tree().current_scene.call_deferred("add_child", gem)
 		
 	# Defer the removal of the enemy node to avoid physics state errors

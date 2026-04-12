@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dii4r3o04ktur" path="res://Entities/EnemySpawner.tscn" id="3_pa6j6"]
 [ext_resource type="PackedScene" uid="uid://drbbvkybmq514" path="res://UI/hud.tscn" id="5_ks8n1"]
 [ext_resource type="PackedScene" uid="uid://bxx7wrfgh4hlu" path="res://UI/upgrade_menu.tscn" id="6_x5oxt"]
+[ext_resource type="PackedScene" uid="uid://fmuhxn63wnqx" path="res://UI/game_over_ui.tscn" id="7_vqnaq"]
+[ext_resource type="PackedScene" uid="uid://bpcdxnp5a16hk" path="res://UI/pause_menu.tscn" id="8_rljl1"]
 
 [node name="World" type="Node2D" unique_id=2018461267]
 script = ExtResource("1_pa6j6")
@@ -16,10 +18,13 @@ current_level = ExtResource("2_4dvsh")
 [node name="Player" parent="." unique_id=791527053 instance=ExtResource("1_fj7yv")]
 
 [node name="EnemySpawner" parent="Player" unique_id=889252609 instance=ExtResource("3_pa6j6")]
-spawn_rate = 0.5
-min_distance = 1100.0
-max_distance = 1400.0
+spawn_rate = 1.0
+min_distance = 750.0
 
 [node name="Hud" parent="." unique_id=2108541017 instance=ExtResource("5_ks8n1")]
 
 [node name="UpgradeMenu" parent="." unique_id=2054709750 instance=ExtResource("6_x5oxt")]
+
+[node name="GameOverUI" parent="." unique_id=1764972576 instance=ExtResource("7_vqnaq")]
+
+[node name="PauseMenu" parent="." unique_id=2081083467 instance=ExtResource("8_rljl1")]

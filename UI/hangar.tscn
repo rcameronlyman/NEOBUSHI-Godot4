@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://or0idknteq1p"]
+
+[ext_resource type="Script" uid="uid://68xch0jjcjk1" path="res://UI/hangar.gd" id="1_g252d"]
+[ext_resource type="Script" uid="uid://dvb87pjliucji" path="res://Resources/player_resource.gd" id="2_snvvw"]
+[ext_resource type="Resource" uid="uid://dqbely7151ppr" path="res://Resources/kineticmech.tres" id="3_gkusj"]
+[ext_resource type="PackedScene" uid="uid://7k8dndea7tlu" path="res://UI/stat_row.tscn" id="4_gkusj"]
+
+[node name="Hangar" type="CanvasLayer" unique_id=965212360]
+script = ExtResource("1_g252d")
+available_mechs = Array[ExtResource("2_snvvw")]([ExtResource("3_gkusj")])
+stat_row_scene = ExtResource("4_gkusj")
+
+[node name="MainContainer" type="Control" parent="." unique_id=1159599882]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=1579955444]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20784314, 0.32941177, 1, 0.22352941)
+
+[node name="BankDisplay" type="Label" parent="." unique_id=381189320]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "META XP: 0"
+horizontal_alignment = 1
+
+[node name="SelectionPage" type="MarginContainer" parent="." unique_id=1925108047]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="SelectionLayout" type="VBoxContainer" parent="SelectionPage" unique_id=286688097]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="SelectionPage/SelectionLayout" unique_id=1286904647]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "CHOOSE YOUR MECH"
+horizontal_alignment = 1
+
+[node name="MechList" type="HBoxContainer" parent="SelectionPage/SelectionLayout" unique_id=1652769921]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradePage" type="MarginContainer" parent="." unique_id=1605391435]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="UpgradeLayout" type="VBoxContainer" parent="UpgradePage" unique_id=224634163]
+layout_mode = 2
+
+[node name="MechTitle" type="Label" parent="UpgradePage/UpgradeLayout" unique_id=1699567348]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "KINETIC MECH"
+
+[node name="UpgradeScroll" type="ScrollContainer" parent="UpgradePage/UpgradeLayout" unique_id=464920737]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatList" type="VBoxContainer" parent="UpgradePage/UpgradeLayout/UpgradeScroll" unique_id=566092878]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="UpgradePage/UpgradeLayout" unique_id=226426823]
+layout_mode = 2
+text = "BACK TO MECH SELECT"
+
+[node name="ResetButton" type="Button" parent="UpgradePage/UpgradeLayout" unique_id=1937464449]
+unique_name_in_owner = true
+layout_mode = 2
+text = "RESET ALL UPGRADES"
+
+[node name="ExitButton" type="Button" parent="." unique_id=2064816353]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.0
+offset_top = -31.0
+offset_right = 98.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "RETURN TO MAIN MENU"
+
+[connection signal="pressed" from="UpgradePage/UpgradeLayout/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

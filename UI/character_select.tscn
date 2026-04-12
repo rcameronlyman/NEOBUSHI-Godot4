@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://s8lbjyqmhvou"]
+
+[ext_resource type="Script" uid="uid://p2kkg2vv86kq" path="res://UI/character_select.gd" id="1_5okj5"]
+[ext_resource type="Script" uid="uid://dvb87pjliucji" path="res://Resources/player_resource.gd" id="2_gwku5"]
+[ext_resource type="Resource" uid="uid://dqbely7151ppr" path="res://Resources/kineticmech.tres" id="3_l6fd5"]
+
+[node name="CharacterSelect" type="CanvasLayer" unique_id=1654359183]
+script = ExtResource("1_5okj5")
+available_mechs = Array[ExtResource("2_gwku5")]([ExtResource("3_l6fd5")])
+
+[node name="Background" type="ColorRect" parent="." unique_id=1919979981]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32190165, 0.32190165, 0.32190165, 1)
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=152490714]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="CenterLayout" type="VBoxContainer" parent="MainMargin" unique_id=1393274181]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="NavigationLayout" type="HBoxContainer" parent="MainMargin/CenterLayout" unique_id=181717894]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PrevButton" type="Button" parent="MainMargin/CenterLayout/NavigationLayout" unique_id=670252767]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "<"
+
+[node name="MechPage" type="VBoxContainer" parent="MainMargin/CenterLayout/NavigationLayout" unique_id=538169601]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MechTitle" type="Label" parent="MainMargin/CenterLayout/NavigationLayout/MechPage" unique_id=519135350]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "[MECH NAME]"
+horizontal_alignment = 1
+
+[node name="SpriteContainer" type="Control" parent="MainMargin/CenterLayout/NavigationLayout/MechPage" unique_id=831158731]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="MechVisual" type="AnimatedSprite2D" parent="MainMargin/CenterLayout/NavigationLayout/MechPage/SpriteContainer" unique_id=294744337]
+unique_name_in_owner = true
+position = Vector2(714, 251)
+scale = Vector2(0.75, 0.75)
+
+[node name="StatList" type="GridContainer" parent="MainMargin/CenterLayout/NavigationLayout/MechPage" unique_id=761720203]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="NextButton" type="Button" parent="MainMargin/CenterLayout/NavigationLayout" unique_id=131140186]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = ">"
+
+[node name="StartButton" type="Button" parent="MainMargin/CenterLayout" unique_id=43953469]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "DEPLOY MECH"
+
+[connection signal="pressed" from="MainMargin/CenterLayout/NavigationLayout/PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="MainMargin/CenterLayout/NavigationLayout/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="MainMargin/CenterLayout/StartButton" to="." method="_on_start_button_pressed"]
