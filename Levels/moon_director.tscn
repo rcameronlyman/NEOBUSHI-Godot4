@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bbeee5q7d6i3e"]
+
+[ext_resource type="Script" uid="uid://datiiaytivsjm" path="res://Levels/moon_director.gd" id="1_s2qu0"]
+[ext_resource type="PackedScene" uid="uid://xmia6yiuyhav" path="res://UI/mission_intro_ui.tscn" id="2_b4wfx"]
+
+[node name="MoonDirector" type="Node2D" unique_id=1021928648]
+script = ExtResource("1_s2qu0")
+intro_splash_scene = ExtResource("2_b4wfx")

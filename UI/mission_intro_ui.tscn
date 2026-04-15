@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://xmia6yiuyhav"]
+
+[ext_resource type="Script" uid="uid://ccwlljt1mw4wt" path="res://UI/mission_intro_ui.gd" id="1_dvgeq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dvgeq"]
+font_size = 64
+font_color = Color(0.65971196, 0.069479674, 0.020942556, 1)
+
+[node name="MissionIntroUi" type="CanvasLayer" unique_id=2050676277]
+process_mode = 3
+script = ExtResource("1_dvgeq")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=889261144]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4862745)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1456913137]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=613004441]
+layout_mode = 2
+
+[node name="ObjectiveLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1020901125]
+unique_name_in_owner = true
+layout_mode = 2
+text = "THIN OUT THE ENEMY FORCES"
+label_settings = SubResource("LabelSettings_dvgeq")
+horizontal_alignment = 1
+
+[node name="InstructionLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1166177240]
+unique_name_in_owner = true
+layout_mode = 2
+text = "HIT SPACEBAR"
+horizontal_alignment = 1

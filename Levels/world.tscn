@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://d0kgexdoyh0v2" path="res://Resources/moon_level.tres" id="2_4dvsh"]
 [ext_resource type="PackedScene" uid="uid://dii4r3o04ktur" path="res://Entities/EnemySpawner.tscn" id="3_pa6j6"]
 [ext_resource type="PackedScene" uid="uid://drbbvkybmq514" path="res://UI/hud.tscn" id="5_ks8n1"]
+[ext_resource type="PackedScene" uid="uid://bldcawmfo0qli" path="res://UI/round_timer_ui.tscn" id="6_06jdw"]
 [ext_resource type="PackedScene" uid="uid://bxx7wrfgh4hlu" path="res://UI/upgrade_menu.tscn" id="6_x5oxt"]
 [ext_resource type="PackedScene" uid="uid://fmuhxn63wnqx" path="res://UI/game_over_ui.tscn" id="7_vqnaq"]
 [ext_resource type="PackedScene" uid="uid://bpcdxnp5a16hk" path="res://UI/pause_menu.tscn" id="8_rljl1"]
@@ -18,13 +19,17 @@ current_level = ExtResource("2_4dvsh")
 [node name="Player" parent="." unique_id=791527053 instance=ExtResource("1_fj7yv")]
 
 [node name="EnemySpawner" parent="Player" unique_id=889252609 instance=ExtResource("3_pa6j6")]
-spawn_rate = 1.0
 min_distance = 750.0
 
 [node name="Hud" parent="." unique_id=2108541017 instance=ExtResource("5_ks8n1")]
+
+[node name="RoundTimerUi" parent="." unique_id=77749055 instance=ExtResource("6_06jdw")]
+layer = 1
 
 [node name="UpgradeMenu" parent="." unique_id=2054709750 instance=ExtResource("6_x5oxt")]
 
 [node name="GameOverUI" parent="." unique_id=1764972576 instance=ExtResource("7_vqnaq")]
 
 [node name="PauseMenu" parent="." unique_id=2081083467 instance=ExtResource("8_rljl1")]
+
+[node name="DirectorContainer" type="Node" parent="." unique_id=84231559]

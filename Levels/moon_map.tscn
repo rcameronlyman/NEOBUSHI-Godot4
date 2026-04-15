@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ch6ptysij2xlx"]
 
 [ext_resource type="Texture2D" uid="uid://bnlodj5g3mvds" path="res://Assets/FLOORTEST.png" id="1_j1tcp"]
-[ext_resource type="Script" uid="uid://datiiaytivsjm" path="res://Levels/moon_director.gd" id="2_sihxa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sihxa"]
 texture = ExtResource("1_j1tcp")
@@ -25,6 +24,3 @@ layer_0/tile_data = PackedInt32Array(-65536, 0, 0, 0, 0, 0, 65535, 0, 0, -1, 0, 
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=452903836]
 navigation_polygon = SubResource("NavigationPolygon_j1tcp")
-
-[node name="MoonDirector" type="Node" parent="." unique_id=1103660559]
-script = ExtResource("2_sihxa")

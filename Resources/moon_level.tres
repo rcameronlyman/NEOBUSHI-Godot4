@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dlftimhnur5lr" path="res://Resources/level_resource.gd" id="1_46ynx"]
 [ext_resource type="PackedScene" uid="uid://ch6ptysij2xlx" path="res://Levels/moon_map.tscn" id="1_cfw88"]
+[ext_resource type="PackedScene" uid="uid://bbeee5q7d6i3e" path="res://Levels/moon_director.tscn" id="1_xoh2e"]
 
 [resource]
 script = ExtResource("1_46ynx")
 level_name = "Moon"
+base_spawn_interval = 0.5
 map_scene = ExtResource("1_cfw88")
+director_scene = ExtResource("1_xoh2e")
 metadata/_custom_type_script = "uid://dlftimhnur5lr"

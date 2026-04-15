@@ -54,6 +54,10 @@ func _ready() -> void:
 	# 3. NEW: Listen for the player's death to secure the pending XP!
 	if GameEvents.has_signal("player_died"):
 		GameEvents.player_died.connect(commit_pending_xp)
+	
+	# 4. NEW: Connect to time limit reached for mission completion
+	if GameEvents.has_signal("time_limit_reached"):
+		GameEvents.time_limit_reached.connect(_on_time_limit_reached)
 
 # --- BANKING LOGIC ---
 
@@ -75,6 +79,15 @@ func clear_pending_xp() -> void:
 	# Called on "Retry" or "Quit" to forfeit current progress 
 	print("META BANK: Forfeited ", pending_meta_xp, " XP.")
 	pending_meta_xp = 0
+
+# NEW: Mission time up logic
+func _on_time_limit_reached() -> void:
+	# 1. Secure the bag (Keep XP)
+	commit_pending_xp()
+	
+	# 2. Trigger the Game Over state via the existing death signal
+	if GameEvents.has_signal("player_died"):
+		GameEvents.player_died.emit()
 
 # --- META UPGRADE LOGIC ---
 
@@ -127,14 +140,19 @@ func reset_mech_upgrades(mech_name: String) -> void:
 # --- IN-RUN PROGRESSION LOGIC ---
 
 func _on_level_up(_current_player_level: int) -> void:
-	# 1. Pause the game
+	# 1. Fetch choices before pausing to check if the pool is empty
+	var choices = get_random_upgrades(3)
+	
+	if choices.is_empty():
+		print("PROGRESSION: No upgrades available. Resuming game.")
+		# Note: You can add a fallback reward here (e.g., grant 100 Meta XP)
+		return
+
+	# 2. Pause the game
 	get_tree().paused = true
 	
-	# 2. Update the Inventory UI with the current collected gear 
+	# 3. Update the Inventory UI with the current collected gear 
 	GameEvents.update_inventory_ui.emit(current_weapons, current_passives)
-	
-	# 3. Pick 3 random upgrades
-	var choices = get_random_upgrades(3)
 	
 	# 4. Tell the UI to show these choices 
 	GameEvents.display_upgrade_choices.emit(choices)

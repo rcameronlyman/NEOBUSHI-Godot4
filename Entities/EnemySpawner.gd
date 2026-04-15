@@ -1,11 +1,16 @@
 extends Node2D
 
+# Root Node: Node2D
+# Path: /Entities/EnemySpawner.gd
+
 @export var enemy_scene: PackedScene
 @export var enemy_data: EnemyResource
-@export var spawn_rate: float = 2.0 # Base seconds between spawns
+
+## Base settings (will be overwritten by LevelResource if mission_started is received)
+@export var spawn_interval: float = 2.0 
 
 @export_group("Spawn Ranges")
-@export var min_distance: float = 700.0  # Just outside a standard 1080p view
+@export var min_distance: float = 700.0  
 @export var max_distance: float = 1000.0
 
 @onready var timer = $Timer
@@ -17,20 +22,35 @@ func _ready() -> void:
 	# Ensure the random number generator is properly seeded
 	randomize()
 	
-	# 1. Listen for intensity changes from the Director
+	# 1. Listen for the mission setup to get data-driven values [cite: 13, 2026-03-30]
+	GameEvents.mission_started.connect(_on_mission_started)
+	
+	# 2. Listen for intensity changes from the Director [cite: 1, 2026-03-30]
 	GameEvents.request_spawn_intensity.connect(_on_intensity_requested)
 	
-	# 2. Set the initial timer speed
+	# Set the initial timer speed and start
 	update_timer_speed()
 	timer.start()
 
+func _on_mission_started(level_resource: LevelResource) -> void:
+	# 3. Apply level-specific data from the resource [cite: 13, 2026-03-30]
+	spawn_interval = level_resource.base_spawn_interval
+	min_distance = level_resource.spawn_min_distance
+	max_distance = level_resource.spawn_max_distance
+	
+	# Recalculate timer immediately with the new base interval
+	update_timer_speed()
+	print("SPAWNER: Data received for ", level_resource.level_name)
+
 func _on_intensity_requested(intensity: float) -> void:
+	# Update internal tracker and recalculate the clock speed [cite: 1]
 	current_intensity = intensity
 	update_timer_speed()
 
 func update_timer_speed() -> void:
-	# MATH: Base Rate / Intensity = New Wait Time.
-	timer.wait_time = max(0.1, spawn_rate / current_intensity)
+	# MATH: Base Interval / Intensity = New Wait Time. [cite: 1]
+	# (e.g. 2.0s interval / 2.0 intensity = 1.0s wait time)
+	timer.wait_time = max(0.1, spawn_interval / current_intensity)
 
 func _on_timer_timeout() -> void:
 	spawn_enemy()
@@ -57,7 +77,7 @@ func get_random_spawn_position() -> Vector2:
 	# Pick a random distance between our min and max
 	var distance = randf_range(min_distance, max_distance)
 	
-	# Use Vector2.from_angle for more robust directional vector creation
+	# Use Vector2.from_angle for robust directional vector creation
 	var direction = Vector2.from_angle(angle)
 	var offset = direction * distance
 	

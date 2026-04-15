@@ -10,17 +10,28 @@ func _ready() -> void:
 	load_level()
 
 func load_level() -> void:
-	if current_level and current_level.map_scene:
-		# Create an instance of the map from your Resource
-		var map_instance = current_level.map_scene.instantiate()
-		
-		# Put it in the container so it stays in the background
-		level_container.add_child(map_instance)
-		
-		# Apply the zoom value defined in the level resource to the player's camera
-		if player and player.has_node("Camera2D"):
-			player.get_node("Camera2D").zoom = current_level.camera_zoom
+	if current_level:
+		# --- EXISTING MAP LOGIC ---
+		if current_level.map_scene:
+			var map_instance = current_level.map_scene.instantiate()
+			level_container.add_child(map_instance)
 			
+			if player and player.has_node("Camera2D"):
+				player.get_node("Camera2D").zoom = current_level.camera_zoom
+		
+		# --- EXISTING MODULAR DIRECTOR LOGIC ---
+		if current_level.director_scene:
+			var director = current_level.director_scene.instantiate()
+			$DirectorContainer.add_child(director)
+			
+			# Pass the resource data to the director brain
+			if "level_data" in director:
+				director.level_data = current_level
+		
+		# --- NEW: BROADCAST MISSION DATA ---
+		# This signal tells nodes like the EnemySpawner to configure themselves
+		GameEvents.mission_started.emit(current_level)
+				
 		print("Successfully loaded: ", current_level.level_name)
 	else:
 		push_warning("No level resource assigned to the World!")

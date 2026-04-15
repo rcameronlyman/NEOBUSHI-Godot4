@@ -1,14 +1,23 @@
 extends Node
 
+# Root Node: Node
+# Path: /Levels/moon_director.gd
+
+@export_group("Mission Config")
+## Drag the Moon's LevelResource here to get the 15-minute limit
+@export var level_data: LevelResource 
+## Drag your mission_intro_ui.tscn here
+@export var intro_splash_scene: PackedScene
+
 @export_group("Spawning Targets")
 @export var elite_scene: PackedScene
 @export var base_location: Node2D
 
 @export_group("Time Scaling")
-## How much the intensity increases every 60 seconds (e.g., 0.1 = 10% faster)
+## How much the intensity increases every 60 seconds
 @export var intensity_gain_per_minute: float = 0.1
 
-enum MissionPhase { ATTRITION, BREACH, INTERIOR, ERADICATION, SHOWDOWN }
+enum MissionPhase { ATTRITION, BREACH, INTERIOR, ERADICATION, SHOWDOWN, TIME_UP }
 var current_phase: MissionPhase = MissionPhase.ATTRITION
 
 var total_kills: int = 0
@@ -17,32 +26,63 @@ var base_swarm_total: int = 200
 var base_swarm_remaining: int = 200
 var elite_spawned: bool = false
 
-# --- SCALING VARIABLES ---
+# --- SCALING & TIMER VARIABLES ---
 var time_elapsed: float = 0.0
-var phase_intensity: float = 1.0
 var time_intensity: float = 1.0
+var phase_intensity: float = 1.0
+var is_mission_active: bool = true
 
 func _ready() -> void:
+	# 1. Connect signals
 	GameEvents.enemy_died.connect(_on_enemy_died)
 	GameEvents.wall_damaged.connect(_on_wall_damaged)
 	GameEvents.wall_destroyed.connect(_on_wall_destroyed)
 	
-	# Initialize Phase 1
+	# 2. Trigger the Intro Splash Screen
+	if intro_splash_scene:
+		var splash = intro_splash_scene.instantiate()
+		add_child(splash)
+		# Pass the level data so the UI knows what text to display
+		if "level_resource" in splash:
+			splash.level_resource = level_data
+	
+	# 3. Initialize Phase 1 data
 	GameEvents.objective_updated.emit("Phase 1: Thin out Forces", 0.0)
 
 func _process(delta: float) -> void:
+	if not is_mission_active:
+		return
+		
 	# 1. Track total time spent in the level
 	time_elapsed += delta
 	
-	# 2. Calculate how many full minutes have passed
+	# 2. Calculate and broadcast remaining time for the UI
+	if level_data:
+		var max_seconds = level_data.time_limit_minutes * 60.0
+		var time_remaining = max(0.0, max_seconds - time_elapsed)
+		
+		# Broadcast to the UI (UI handles the formatting and the red color shift)
+		GameEvents.time_updated.emit(time_remaining)
+		
+		# Check if the mission clock has run out
+		if time_remaining <= 0.0:
+			on_time_limit_reached()
+	
+	# 3. Handle original Intensity Scaling 
 	var new_time_intensity = 1.0 + (floor(time_elapsed / 60.0) * intensity_gain_per_minute)
 	
-	# 3. Only sync if the minute-mark has actually changed
 	if new_time_intensity != time_intensity:
 		time_intensity = new_time_intensity
 		sync_intensity()
 
-## Combines phase-specific heat with the passage of time and tells the Spawner
+func on_time_limit_reached() -> void:
+	is_mission_active = false
+	current_phase = MissionPhase.TIME_UP
+	print("MOON MISSION: Time limit reached!")
+	# Signal the end of the run to the global event bus
+	GameEvents.time_limit_reached.emit()
+
+## Combines phase-specific heat with the passage of time 
 func sync_intensity() -> void:
 	var total_intensity = phase_intensity * time_intensity
 	GameEvents.request_spawn_intensity.emit(total_intensity)
@@ -103,10 +143,6 @@ func spawn_elite() -> void:
 	
 	if base_location:
 		elite_instance.global_position = base_location.global_position
-	else:
-		var player = get_tree().get_first_node_in_group("player")
-		if player:
-			elite_instance.global_position = player.global_position + Vector2(500, 500)
 
 func start_phase_4() -> void:
 	current_phase = MissionPhase.ERADICATION
